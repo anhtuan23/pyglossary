@@ -109,11 +109,13 @@ class TextGlossaryReader(object):
 		byteProgress = None
 		if self._fileSize:
 			byteProgress = (self._file.tell(), self._fileSize)
-		return self._glos.newEntry(
+		entry = self._glos.newEntry(
 			word,
 			defi,
 			byteProgress=byteProgress,
 		)
+		entry.fileIndex = self._fileIndex
+		return entry
 
 	def setInfo(self, word: str, defi: str) -> None:
 		self._glos.setInfo(word, defi)

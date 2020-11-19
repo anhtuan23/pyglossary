@@ -50,6 +50,7 @@ class Reader(object):
 	depends = {
 		"libzim": "libzim",
 	}
+	resumable = True
 
 	_skip_duplicate_words = False
 

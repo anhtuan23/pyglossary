@@ -55,9 +55,18 @@ class DataEntry(BaseEntry):
 		self._data = data  # bytes instance
 		self._tmpPath = tmpPath
 		self._byteProgress = byteProgress  # Optional[Tuple[int, int]]
+		self._fileIndex = 0
 
 	def getFileName(self) -> str:
 		return self._fname
+
+	@property
+	def fileIndex(self):
+		return self._fileIndex
+
+	@fileIndex.setter
+	def fileIndex(self, index):
+		self._fileIndex = index
 
 	@property
 	def data(self) -> bytes:
@@ -281,6 +290,15 @@ class Entry(BaseEntry):
 		self._defi = defi
 		self._defiFormat = defiFormat
 		self._byteProgress = byteProgress  # Optional[Tuple[int, int]]
+		self._fileIndex = 0
+
+	@property
+	def fileIndex(self):
+		return self._fileIndex
+
+	@fileIndex.setter
+	def fileIndex(self, index):
+		self._fileIndex = index
 
 	def __repr__(self):
 		return (

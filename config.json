@@ -1,6 +1,7 @@
 {
 	"log_time": false,
 	"cleanup": true,
+	"resume": true,
 
 	"lower": false,
 	"utf8_check": true,

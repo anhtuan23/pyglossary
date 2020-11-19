@@ -63,6 +63,11 @@ class UIBase(object):
 			comment="cleanup cache or temporary files after conversion",
 			falseComment="do not cleanup cache or temporary files after conversion",
 		)),
+		("resume", BoolOption(
+			cmd=True,
+			comment="resume conversion if possible",
+			falseComment="never resume conversion",
+		)),
 
 		("lower", BoolOption(
 			cmd=True,

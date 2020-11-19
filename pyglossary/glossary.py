@@ -298,6 +298,7 @@ class Glossary(GlossaryType):
 				self.setInfo(key, value)
 
 		self.ui = ui
+		self.resumeFrom = None
 
 	def _removeDir(self, dirPath):
 		import shutil
@@ -1261,6 +1262,18 @@ class Glossary(GlossaryType):
 		if isdir(outputFilename):
 			log.error(f"Directory already exists: {outputFilename}")
 			return
+
+		inputArgs = self.detectInputFormat(inputFilename, format=inputFormat)
+		if inputArgs is None:
+			return False
+
+		if (
+			self.getConfig("resume", False) and
+			getattr(self.plugins[inputArgs[1]].readerClass, "resumable", None) and
+			getattr(self.plugins[outputFormat].writerClass, "resumable", None)
+		):
+			from pyglossary.status import Status
+			self.resumeFrom = Status.load(inputFilename, outputFilename)
 
 		self.showMemoryUsage()
 

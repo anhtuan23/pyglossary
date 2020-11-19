@@ -143,6 +143,7 @@ class Writer(object):
 	depends = {
 		"icu": "PyICU",
 	}
+	resumable = True
 
 	_compression: str = "zlib"
 	_content_type: str = ""
