@@ -33,7 +33,7 @@
   - Title == `CC-Cedict`
   - Description == `Built on [current_date]`
 
-    <img src="https://raw.githubusercontent.com/wiki/ilius/pyglossary/screenshots/40a-gtk-txt-stardict-aryanpour-dark.png" width="50%" height="50%"/>
+    <img src="https://github.com/anhtuan23/pyglossary/raw/my_branch/build_mdict/MdxBuilder_screenshot.png" width="50%" height="50%"/>
 
 ### From JMdict
 
