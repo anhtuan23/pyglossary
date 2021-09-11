@@ -1,0 +1,10 @@
+{
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportGeneralTypeIssues": "none",
+        "reportUndefinedVariable": "none",
+        "reportMissingModuleSource": "none",
+        "reportMissingImports": "none"
+    },
+    "python.analysis.typeCheckingMode": "off",
+    "sourcery.metricsEnabled": false,
+}
