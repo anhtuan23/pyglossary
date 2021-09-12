@@ -52,6 +52,14 @@
   - Title == `JM-Dict`
   - Description == `Built on [current_date]`
 
+### From Stardict
+
+- Using `WordNet_3_1_1` as source Stardict example, run command:
+
+  py main.py build_mdict\data\WordNet_3_1_1_stardict\WordNet_3_1_1.ifo build_mdict\data\WordNet_3_1_1_stardict\WordNet_3_1_1.mdict_html.txt --read-format=Stardict --write-format=OctopusMdictSource
+
+- Build with MdxBuilder like steps above
+
 ## Using `DecodeStarDict.class`
 
 - Convert `startdict` files to mdict html file
