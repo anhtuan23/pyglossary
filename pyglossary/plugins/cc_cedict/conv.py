@@ -17,6 +17,17 @@ COLORS = {
 	"5": "black",
 }
 
+# Use this to resolve mismatch between syllable length and tone length
+CUSTOM_TONES = {
+	"21三体综合症": ['4', '1', '1', '3', '1', '2', '4'],
+	"21三體綜合症": ['4', '1', '1', '3', '1', '2', '4'],
+	"PO": ['1', '1'],
+	"PO文": ['1', '1', '2'],
+	"TA": ['1', '1'],
+	"美国51区": ['3', '2', '3', '1', '1'],
+	"美國51區": ['3', '2', '3', '1', '1'],
+}
+
 
 def parse_line(line):
 	line = line.strip()
@@ -37,6 +48,10 @@ def make_entry(trad, simp, pinyin, eng):
 
 
 def colorize(hf, syllables, tones):
+    # try to fix mismatch length between syllable and tone with CUSTOM_TONES
+	if len(syllables) != len(tones):
+		tones = CUSTOM_TONES.get(syllables, tones)
+  
 	if len(syllables) != len(tones):
 		log.warn(f"unmatched tones: syllables={syllables!r}, tones={tones}")
 		with hf.element("div", style="display: inline-block"):
