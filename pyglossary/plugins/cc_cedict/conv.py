@@ -80,7 +80,7 @@ def render_article(trad, simp, pinyin, eng):
 
 	f = BytesIO()
 	with ET.htmlfile(f, encoding="utf-8") as hf:
-		with hf.element("div", style="border: 1px solid; padding: 5px"):
+		with hf.element("div", style="padding: 5px"):
 			with hf.element("div"):
 				with hf.element("big"):
 					colorize(hf, simp, tones)
