@@ -21,12 +21,19 @@ class Reader(object):
 		"lxml": "lxml",
 	}
 
+	posStyle = (
+		"background:#DDD;"
+		"padding-left:0.2em;"
+		"padding-right:0.2em;"
+		"border-radius:3px;"
+		# 0.5ex ~= 0.3em, but "ex" is recommended
+	)
+ 
 	tagStyle = (
-		"color:white;"
-		"background:green;"
-		"padding-left:3px;"
-		"padding-right:3px;"
-		"border-radius:0.5ex;"
+		"background:#AEE;"
+		"padding-left:0.2em;"
+		"padding-right:0.2em;"
+		"border-radius:3px;"
 		# 0.5ex ~= 0.3em, but "ex" is recommended
 	)
 
@@ -49,10 +56,11 @@ class Reader(object):
 		if len(input_objects) == 0:
 			return
 
-		if len(input_objects) == 1:
-			hf.write(single_prefix)
-			processor(hf, input_objects[0])
-			return
+		# always make a list of meanings
+		# if len(input_objects) == 1:
+		# 	hf.write(single_prefix)
+		# 	processor(hf, input_objects[0])
+		# 	return
 
 		with hf.element("ol"):
 			for el in input_objects:
@@ -75,7 +83,7 @@ class Reader(object):
 			desc = elem.text
 			if desc == "unclassified":
 				continue
-			with hf.element("i"):
+			with hf.element("small", style=self.posStyle):
 				hf.write(f"{desc.capitalize()}")
 			hf.write(br())
 
@@ -84,12 +92,20 @@ class Reader(object):
 			for elem in sense.findall("gloss")
 			if elem.text
 		]
-		if glossList:
-			for i, gloss in enumerate(glossList):
-				if i > 0:
-					hf.write(", ")
-				hf.write(gloss)
-			hf.write(br())
+
+  		# use an unordered list for glosses instead of comma-separated string
+		# if glossList:
+		# 	for i, gloss in enumerate(glossList):
+		# 		if i > 0:
+		# 			hf.write(", ")
+		# 		hf.write(gloss)
+		# 	hf.write(br())
+  
+		with hf.element("ul"):
+			for gloss in glossList:
+				with hf.element("li"):
+					hf.write(gloss)
+		hf.write(br())
 
 		relatedWords = []
 		for elem in sense.findall("xref"):
@@ -196,20 +212,21 @@ class Reader(object):
 						keywords.append(f"{keb}・{reb}")
 
 				if kebList:
-					with glos.titleElement(hf, kebList[0]):
-						for i, keb in enumerate(kebList):
-							if i > 0:
-								with hf.element("font", color="red"):
-									hf.write(" | ")
-							hf.write(keb)
+					with hf.element("div", style="font-weight: bold"):
+						with glos.titleElement(hf, kebList[0]):
+							for i, keb in enumerate(kebList):
+								if i > 0:
+									with hf.element("span", style="color:red; font-weight: bold"):
+										hf.write(" | ")
+								hf.write(keb)
 					hf.write(br())
 
 				if rebList:
 					for i, (reb, props) in enumerate(rebList):
 						if i > 0:
-							with hf.element("font", color="red"):
+							with hf.element("span", style="color:red; font-weight: bold"):
 								hf.write(" | ")
-						with hf.element("font", color="green"):
+						with hf.element("span", style="color:green; font-weight: bold"):
 							hf.write(reb)
 						for prop in props:
 							hf.write(" ")
