@@ -9,3 +9,4 @@
 /ui
 vulture.*
 .env
+bfg.jar
