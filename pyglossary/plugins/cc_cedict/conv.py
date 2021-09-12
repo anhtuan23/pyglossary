@@ -80,15 +80,14 @@ def render_article(trad, simp, pinyin, eng):
 
 	f = BytesIO()
 	with ET.htmlfile(f, encoding="utf-8") as hf:
-		with hf.element("div", style="padding: 5px"):
-			with hf.element("div"):
-				with hf.element("big"):
-					colorize(hf, simp, tones)
+		with hf.element("big", style="padding: 8px"):
+			with hf.element("div", style="font-weight: bold"):
+				colorize(hf, simp, tones)
 				if trad != simp:
-					hf.write("\xa0/\xa0")  # "\xa0" --> "&#160;" == "&nbsp;"
+					hf.write("\xa0\xa0/\xa0\xa0")  # "\xa0" --> "&#160;" == "&nbsp;"
 					colorize(hf, trad, tones)
-				hf.write(ET.Element("br"))
-				with hf.element("big"):
+			with hf.element("div", style="margin: 8px"):
+				with hf.element("span", style="border: 1px solid; padding: 4px; border-radius: 10px;"):
 					colorize(hf, pinyin_list, tones)
 
 			with hf.element("div"):
