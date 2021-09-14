@@ -10,3 +10,4 @@
 vulture.*
 .env
 bfg.jar
+*.mdict_html.txt
